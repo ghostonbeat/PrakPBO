@@ -4,6 +4,7 @@ class MesinGabut():
         for i in range(len(biner)):
             self.biner.append(biner[i])
 
+        """Inisiasi formasi (cek aja alurnya di tbfo.drawio.png)"""
         self.role = ['q1', 'q2', 'q3']
         self.curr = self.role[0]
 
@@ -43,6 +44,7 @@ class MesinGabut():
             return tentu
 
     def cek(self, curr, jum):
+        """Ngecek Format. Format input harus berupa biner"""
         if curr < jum:
             if self.biner[curr] == '0' or self.biner[curr] == '1':
                 return self.cek(curr+1, jum)
@@ -52,6 +54,7 @@ class MesinGabut():
             return True
 
     def baca(self):
+        """Ngecek apakah string biner sesuai kriteria"""
         if self.cek(0, len(self.biner)) is True:
             if self.circle(0, len(self.biner), False) is True:
                 print("Sesuai Kriteria")
