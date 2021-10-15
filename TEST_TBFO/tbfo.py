@@ -16,14 +16,22 @@ class MesinGabut():
             
         if self.curr == self.role[1]:
             if binchar == '0' or binchar == '1':
+                self.curr = self.role[0]
+                self.masuk = False
+
+        if self.curr == self.role[2]:
+            if binchar == '0':
                 pass
+            if binchar == '1':
+                self.curr = self.role[1]
+                self.masuk = False
 
     def cek(self, curr, jum):
         if curr < jum:
-            if self.biner[curr] != '0' or self.biner != '1':
-                return False
-            else:
+            if self.biner[curr] == '0' or self.biner[curr] == '1':
                 return self.cek(curr+1, jum)
+            else:
+                return False
         else:
             return True
 
@@ -31,7 +39,7 @@ if __name__ == '__main__':
     ambil = input()
     mesin = MesinGabut(ambil)
 
-    if cek(0, len(mesin.biner)):
+    if mesin.cek(0, len(mesin.biner)) is True:
         print("Sesuai Kriteria")
     else:
         print("Tidak Sesuai Kriteria")
