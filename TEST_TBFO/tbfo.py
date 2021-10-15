@@ -1,30 +1,41 @@
 class MesinGabut():
     def __init__(self, biner):
-        self.biner = biner
+        self.biner = []
+        for i in range(len(biner)):
+            self.biner.append(biner[i])
+
         self.role = ['q1', 'q2', 'q3']
         self.curr = self.role[0]
-        self.masuk = False
 
-    def circle(self, binchar):
-        if self.curr == self.role[0]:
-            if binchar == '0':
-                self.curr = self.role[1]
-                self.masuk = False
-            if binchar == '1':
-                self.curr = self.role[2]
-                self.masuk = True
+    def circle(self, start, finish, tentu):
+        if start < finish:
+            if self.curr == self.role[0]:
+                if self.biner[start] == '0':
+                    self.curr = self.role[1]
+                    print(f"{self.biner[start]} -> {self.curr}")
+                    self.circle(start+1, finish, False)
+                else:
+                    self.curr = self.role[2]
+                    print(f"{self.biner[start]} -> {self.curr}")
+                    self.circle(start+1, finish, True)
             
-        if self.curr == self.role[1]:
-            if binchar == '0' or binchar == '1':
-                self.curr = self.role[0]
-                self.masuk = False
+            if self.curr == self.role[1]:
+                if self.biner[start] == '0' or self.biner[start] == '1':
+                    self.curr = self.role[0]
+                    print(f"{self.biner[start]} -> {self.curr}")
+                    self.circle(start+1, finish, False)
 
-        if self.curr == self.role[2]:
-            if binchar == '0':
-                pass
-            if binchar == '1':
-                self.curr = self.role[1]
-                self.masuk = False
+            if self.curr == self.role[2]:
+                if self.biner[start] == '0':
+                    print(f"{self.biner[start]} -> {self.curr}")
+                    pass
+                else:
+                    self.curr = self.role[1]
+                    print(f"{self.biner[start]} -> {self.curr}")
+                    self.circle(start+1, finish, False)
+
+        else:
+            return tentu
 
     def cek(self, curr, jum):
         if curr < jum:
@@ -35,11 +46,17 @@ class MesinGabut():
         else:
             return True
 
+    def baca(self):
+        if self.cek(0, len(self.biner)) is True:
+            if self.circle(0, len(self.biner), False) is True:
+                print("Sesuai Kriteria")
+            else:
+                print("Tidak Sesuai Kriteria")
+        else:
+            print("SALAH FORMAT!!")
+
 if __name__ == '__main__':
     ambil = input()
     mesin = MesinGabut(ambil)
 
-    if mesin.cek(0, len(mesin.biner)) is True:
-        print("Sesuai Kriteria")
-    else:
-        print("Tidak Sesuai Kriteria")
+    mesin.baca()
