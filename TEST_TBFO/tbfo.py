@@ -15,30 +15,30 @@ class MesinGabut():
                     """q1 ke q2"""
                     self.curr = self.role[1]
                     print(f"{self.biner[start]} -> {self.curr}")
-                    self.circle(start+1, finish, False)
+                    return self.circle(start+1, finish, False)
                 else:
                     """q1 ke q3"""
                     self.curr = self.role[2]
                     print(f"{self.biner[start]} -> {self.curr}")
-                    self.circle(start+1, finish, True)
+                    return self.circle(start+1, finish, True)
             
             if self.curr == self.role[1]:
                 if self.biner[start] == '0' or self.biner[start] == '1':
                     """q2 ke q1"""
                     self.curr = self.role[0]
                     print(f"{self.biner[start]} -> {self.curr}")
-                    self.circle(start+1, finish, False)
+                    return self.circle(start+1, finish, False)
 
             if self.curr == self.role[2]:
                 if self.biner[start] == '0':
                     """tetep di q3"""
                     print(f"{self.biner[start]} -> {self.curr}")
-                    pass
+                    return self.circle(start+1, finish, True)
                 else:
                     """q3 ke q2"""
                     self.curr = self.role[1]
                     print(f"{self.biner[start]} -> {self.curr}")
-                    self.circle(start+1, finish, False)
+                    return self.circle(start+1, finish, False)
 
         else:
             return tentu
